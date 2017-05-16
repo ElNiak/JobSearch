@@ -1,0 +1,259 @@
+
+
+
+<html>
+<head>
+  <title>JobSearch</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link href="styleAdd.css" rel="stylesheet" type="text/css" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <style type="text/css">
+  input.hidden {
+    position: absolute;
+    left: -9999px;
+  }
+
+  #profile-image1 {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border:2px solid #FBA01B ;}
+    .tital{ font-size:16px; font-weight:600;}
+    .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div id="topPan">
+      <div id="banner">
+        <div id="banner_contents">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+              <a  class="dropbtn">Navigation</a>
+              <div class="dropdown-content">
+                <a href="#">Searcher</a>
+                <a href="navigationJob.html">Giver</a>
+              </div>
+            </li>
+            <li><a href="#">Add CV</a></li>
+            <li><a href="ajoutJob.html">Add Jobs</a></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+
+
+    <div class="container" align="center">
+      <form class="form-horizontal">
+        <div class="row-xs-10">
+          <div class="col-md-10 ">
+            <div class="panel panel-default" >
+              <div class="panel-heading">  <h4 >Curiculum vita</h4></div>
+              <div class="panel-body" >
+                <div class="box box-info">
+                  <div class="box-body">
+                    <div class="col-sm-12">
+                      <div  align="center">
+                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" align="center">
+                        <input id="profile-image-upload" class="hidden" type="file">
+                        <div style="color:#999;" >click here to change profile image</div>
+                      </div>
+                      <br>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr style="margin:10px 0 10px 0;">
+
+                    <div class="col-sm-6 col-xs-6 "  align="center">
+                      <div class="required-field-block" >
+                        <label>First Name :</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="First name" required>
+                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-sm-6 col-xs-6 "  align="center">
+                      <div class="required-field-block" >
+                        <label>Last Name :</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Last name" required>
+                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+
+                    <div class="col-sm-6 col-xs-6 "  align="center">
+                      <div class="required-field-block">
+                        <label>Email :</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Email" required>
+                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 "  align="center">
+                      <label>Professional phone :</label>
+                      <div class="input-group">
+                        <input type="text" placeholder="Phone" class="form-control">
+                        <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default" >
+              <div class="panel-body">
+                <div class="col-sm-12 col-xs-6 "  align="center">
+                  <div class="form-group">
+                    <label for="sel1">Higher qualifications :</label>
+                    <select class="form-control" id="sel1">
+                      <option>Secondary</option>
+                      <option>High school</option>
+                      <option>Universtity</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-6 "  align="center">
+                  <div class="required-field-block">
+                    <label>Your graduations :</label>
+                    <div class="input-group">
+                      <textarea rows="4" class="form-control" placeholder="Message"></textarea>
+                      <span class="input-group-addon succes">
+                        <span class="glyphicon glyphicon-remove">
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <div class="col-sm-6 col-xs-6 "  align="center">
+                  <div class="required-field-block" >
+                    <label>Your experience :</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Your experience" required>
+                      <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xs-6 "  align="center">
+                  <div class="required-field-block" >
+                    <label>Localisation :</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Localisation" required>
+                      <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-6 col-xs-6 "  align="center">
+                  <div class="required-field-block">
+                    <label>Mother tongue :</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Mother tongue" required>
+                      <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6 "  align="center">
+                  <label>Secondary tongue :</label>
+                  <div class="input-group">
+                    <input type="text" placeholder="Secondary tongue" class="form-control">
+                    <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+              </div>
+
+            </div>
+            <div class="panel panel-default" >
+              <div class="panel-body">
+                <div class="col-sm-12 col-xs-6 "  align="center">
+                  <div class="required-field-block">
+                    <label>Small descritpion :</label>
+                    <div class="input-group">
+                      <textarea rows="4" class="form-control" placeholder="Message"></textarea>
+                      <span class="input-group-addon succes">
+                        <span class="glyphicon glyphicon-remove">
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-12 col-xs-6 "  align="center">
+                  <div class="required-field-block">
+                    <label>Your motivations :</label>
+                    <div class="input-group">
+                      <textarea rows="4" class="form-control" placeholder="Message"></textarea>
+                      <span class="input-group-addon succes">
+                        <span class="glyphicon glyphicon-remove">
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-12 col-xs-6 "  align="center">
+                  <div class="required-field-block">
+                    <label>Your attempts :</label>
+                    <div class="input-group">
+                      <textarea rows="4" class="form-control" placeholder="Message"></textarea>
+                      <span class="input-group-addon succes">
+                        <span class="glyphicon glyphicon-remove">
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+              </div>
+
+            </div>
+            <button type="button" class="btn-lg">Submit</button>
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+          </div>
+          <script>
+          $(function() {
+            $('#profile-image1').on('click', function() {
+              $('#profile-image-upload').click();
+            });
+          });
+          </script>
+        </div>
+      </form>
+    </div>
+    <div id="footermainPan">
+      <div id="footerPan">
+        <ul>
+          <li><a href="#">Home</a>|</li>
+
+        </ul>
+        <p class="copyright">Jobsearch 2017 all right reaserved</p>
+        <a href="#"><img src="https://scontent-amt2-1.xx.fbcdn.net/v/t34.0-12/18217728_120332000456574610_1583941798_n.png?oh=86942c3cb3e13bf973e49f1b56ec16b1&oe=590A46AA" title="logo" alt="logo" width="248" height="248" border="0" /></a>
+      </div>
+    </div>
+  </body>
+  </html>
