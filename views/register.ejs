@@ -8,42 +8,42 @@
 	</head>
 	<body>
 		<div class="container">
-            <form class="form-horizontal" role="form">
+            <form action= "127.0.0.1:8080/register_post" class="form-horizontal" role="form">
                 <h2 class="text-center">Registration Form</h2>
                 <div class="form-group">
                     <label for="firstName" class="col-sm-3 control-label">First Name</label>
                     <div class="col-sm-9">
-                        <input required type="text" id="firstName" placeholder="First Name" class="form-control" autofocus>
+                        <input required type="text" name="firstName" placeholder="First Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastName" class="col-sm-3 control-label">Last Name</label>
                     <div class="col-sm-9">
-                        <input required type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus>
+                        <input required type="text" name="lastName" placeholder="Last Name" class="form-control" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-9">
-                        <input required type="email" id="email" placeholder="Email" class="form-control">
+                        <input required type="email" name="email" placeholder="Email" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
                     <div class="col-sm-9">
-                        <input required type="password" id="password" placeholder="Password" class="form-control">
+                        <input required type="password" name="password" placeholder="Password" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
                     <div class="col-sm-9">
-                        <input required type="date" id="birthDate" class="form-control">
+                        <input required type="date" name="birthDate" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="country" class="col-sm-3 control-label">Country</label>
                     <div class="col-sm-9">
-                        <select required id="country" class="form-control">
+                        <select required name="country" class="form-control">
                             <option>Afghanistan</option>
                             <option>Bahamas</option>
                             <option>Cambodia</option>
@@ -61,17 +61,17 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="femaleRadio" value="Female" required>Female
+                                    <input type="radio" name="gender" name="femaleRadio" value="Female" required>Female
                                 </label>
                             </div>
                             <div class="col-sm-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="maleRadio" value="Male">Male
+                                    <input type="radio" name="gender" name="maleRadio" value="Male">Male
                                 </label>
                             </div>
                             <div class="col-sm-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="otherRadio" value="Other">Other
+                                    <input type="radio" name="gender" name="otherRadio" value="Other">Other
                                 </label>
                             </div>
                         </div>
