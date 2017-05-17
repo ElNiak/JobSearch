@@ -1,29 +1,25 @@
 var express = require('express');
-var path = require('path');
 var bodyParser = require('body-parser');
 
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-
 var app = express();
 
-app.use(express.bodyParser());
-app.use(express.static('views'));
-app.set('view engine', 'ejs');
-
+/*
 //page d'accueil
 app.get('/', function(req, res) {
 	res.render(__dirname + "/"+'accueil.html');
 });
+*/
 
 //register
 app.get('/register', function(req, res) {
 	res.render(__dirname + "/views/"+'register.ejs');
 });
 
-app.post('/register_post',urlencodedParser, function(req, res){
-  response = {
+app.post('/register/add/',urlencodedParser, function(req, res){
+  var response = {
       first_name:req.body.firstName,
       last_name:req.body.lastName,
       email:req.body.email,
@@ -33,9 +29,9 @@ app.post('/register_post',urlencodedParser, function(req, res){
       gender:req.body.gender
   }
    console.log(response);
-   res.end(JSON.stringify(response));
+   res.redirect('/register');
 });
-
+/*
 //page CV
 app.get('/cv', function(req, res) {
 	res.render('ajoutCV.html');
@@ -58,7 +54,8 @@ app.get('/navigationJob', function(req, res) {
 
 //404
 app.use(function(req, res, next){
-});
+	res.redirect('/');
+});*/
 
 /*
 app.get('/:pagename', function(req, res) {
