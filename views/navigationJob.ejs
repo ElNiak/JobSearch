@@ -45,16 +45,16 @@
       <div id="banner">
         <div id="banner_contents">
           <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="/home">Home</a></li>
             <li class="dropdown">
               <a  class="dropbtn">Navigation</a>
               <div class="dropdown-content">
-                <a href="#">Searcher</a>
+                <a href="/navigationCV">Searcher</a>
                 <a href="#">Giver</a>
               </div>
             </li>
             <li><a href="/cv">Add CV</a></li>
-            <li><a href="#">Add Jobs</a></li>
+            <li><a href="/job">Add Jobs</a></li>
           </ul>
         </div>
       </div>
@@ -72,16 +72,26 @@
                     <div class="form-group">
                       <div class="serchtile">I'm Looking</div>
                       <label class="sr-only" for="looking">I'm looking</label>
-                      <select id="selectbasic" name="selectbasic" class="form-control">
-                        <option value="1">Administration</option>
-                        <option value="2">Agriculture</option>
-                        <option value="3">Artisanat</option>
-                        <option value="4">Gestion</option>
-                        <option value="5">Economie</option>
-                        <option value="6">Enseignement</option>
-                        <option value="7">IT, R&D</option>
-                        <option value="8">Vente</option>
-                        <option value="9">Securite</option>
+                      <select id="sectorComp" name="sectorComp" class="form-control">
+                        <option value="Administration">Administration</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Artisanat">Artisanat</option>
+                        <option value="Gestion">Gestion</option>
+                        <option value="Economie">Economie, banque</option>
+                        <option value="Enseignement">Enseignement</option>
+                        <option value="IT">IT, R&D</option>
+                        <option value="Vente">Vente</option>
+                        <option value="Securite">Securite</option>
+                        <option value="Sante">Sante, medecine</option>
+                        <option value="Social">Social</option>
+                        <option value="Conception">Conception & architecture</option>
+                        <option value="Direction">Direction general</option>
+                        <option value="Marketing">Marketing et publicite</option>
+                        <option value="Media">Media & information</option>
+                        <option value="Droit">Droit</option>
+                        <option value="Horeca">Horeca</option>
+                        <option value="Tourisme">Tourisme</option>
+                        <option value="Construction">Construction</option>
                       </select>
                     </div>
                   </div>
@@ -90,7 +100,7 @@
                       <div class="serchtile">Minimum of experience</div>
                       <label class="sr-only" for="expe">Minimum of experience</label>
                       <div class="input-group">
-                        <select id="age" name="age" class="form-control">
+                        <select id="expeComp" name="expeComp" class="form-control">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -116,18 +126,31 @@
                         <div class="serchtile">Localisation</div>
                         <label class="sr-only" for="toage">Localisation</label>
                         <div class="input-group">
-                          <select id="age" name="toage" class="form-control">
-                            <option value="Luxembourg">Luxembourg</option>
-                            <option value="Hainaux">Hainaux</option>
+                          <select id="locComp" name="locComp" class="form-control">
                             <option value="Anvers">Anvers</option>
-                            <option value="Bruxelles">Bruxelles</option>
-                            <option value="Liege">Liege</option>
+                            <option value="Limbourg">Limbourg</option>
+                            <option value="Flandre orientale">Flandre orientale</option>
+                            <option value="Brabant flamand">Brabant flamand</option>
+                            <option value="Flandre occidentale">Flandre occidentale</option>
+                            <option value="Brabant wallon">Brabant wallon</option>
+                            <option value="Hainaux">Hainaux</option>
+                            <option value="Liège">Liège</option>
+                            <option value="Luxembourg">Luxembourg</option>
+                            <option value="Namur">Namur</option>
+                            <option value="Bruxelle">Bruxelle capitale</option>
                           </select>  </div>
                         </div>
                       </div>
                       <div class="col-md-2">
                         <br>
-                        <button type="submit" class="btn btn-default btn-primary">Search</button>
+                        <button type="search" class="btn btn-default btn-primary">Search</button>
+                        <script>
+                        $('button').click(function () {
+                          $.post('/navigationJob', {data: 'blah'}, function (data) {
+                            console.log(data);
+                          });
+                        }, 'json');
+                        </script>
                       </div>
                     </form>
                   </div>

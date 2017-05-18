@@ -12,14 +12,23 @@ app.use(express.static('views'));
 app.set('view engine', 'ejs');
 
 //page d'accueil
-app.get('/', function(req, res) {
+app.get('/home', function(req, res) {
 	res.render(__dirname + "/views/"+'accueil.ejs');
 });
 
 //register
-app.get('/register', function(req, res) {
-	res.render(__dirname + "/views/"+'register.ejs');
-});
+/*db.get('users').insert(response,
+  	(err, doc) => {
+     	if (err) {
+       	res.send(err);
+     	}
+     	else {
+        req.session.user = doc;
+        res.redirect('/navigationJob');
+     	}
+  	}
+  );*/
+
 app.post('/register/add/',urlencodedParser, function(req, res){
   var response = {
       first_name:req.body.firstName,
@@ -84,15 +93,33 @@ app.post('/job/add/',urlencodedParser, function(req, res){
 app.get('/navigationCV', function(req, res) {
 	res.render(__dirname + "/views/"+'navigationCV.ejs');
 });
+app.post('/navigationCV/add/',urlencodedParser, function(req, res){
+  var responseSearch = {
+		sectorComp:req.body.sectorComp,
+		expeComp:req.body.expeComp,
+		locComp:req.body.locComp,
+  }
+   console.log(response);
+   res.redirect('/job');
+});
 
 //navigation job
 app.get('/navigationJob', function(req, res) {
 	res.render(__dirname + "/views/"+'navigationJob.ejs');
 });
-
+app.post('/navigationJob/add/',urlencodedParser, function(req, res){
+	var responseSearch = {
+		sectorCV:req.body.sectorCV,
+		expeCV:req.body.expeCV,
+		locCV:req.body.locCV
+	}
+	//var job = db.job.find(responseSearch);
+  res.redirect('/job');
+});
 //404
 app.use(function(req, res, next){
 });
+
 
 /*
 app.get('/:pagename', function(req, res) {
