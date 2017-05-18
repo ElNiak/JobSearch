@@ -1,61 +1,184 @@
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
+var session = require('express-session')
+var mongo = require('mongodb');
+var monk = require('monk');
 
-// Create application/x-www-form-urlencoded parser
+var db = monk('localhost:27017/JobSearch');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 var app = express();
 
-/*
+app.use(express.static('views'));
+app.use(session({
+    secret: "cookie_secret",
+    name: "cookie_name",
+    user: {},
+    resave: false,
+    saveUninitialized: false,
+    maxAge : 24*60*60*1000 //cookie kept for a day
+}));
+
 //page d'accueil
 app.get('/', function(req, res) {
-	res.render(__dirname + "/"+'accueil.html');
+  //if user is allready logged in, log him out
+  if(req.session.user){
+    req.session.destroy(function(err) {
+      if(err) {
+        res.send(err);
+      }
+    });
+  }
+	res.render(__dirname + "/views/"+'accueil.ejs');
 });
-*/
+//action: login
+app.post('/login', urlencodedParser, function(req, res){  
+  var response = {
+    email:req.body.email,
+    password: req.body.password
+  }
+  db.get('users').findOne(response,
+    (err, doc) => {
+      if (err) {//erreur lors de la recherche dans la base de donnée
+        res.send(err);
+      }
+      else {
+        if(doc){//on a trouvé un utilisateur correspondant
+          req.session.user = doc;
+          res.redirect('/navigationJob');
+        }
+        else{//aucun utilisateur correspondant dans la base de donnée
+          res.redirect('/', {message: "Invalid credentials!"});//TODO afficher message
+        }
+      }
+    }
+  );  
+});
 
 //register
 app.get('/register', function(req, res) {
 	res.render(__dirname + "/views/"+'register.ejs');
 });
-
 app.post('/register/add/',urlencodedParser, function(req, res){
-  var response = {
-      first_name:req.body.firstName,
-      last_name:req.body.lastName,
-      email:req.body.email,
-      password:req.body.password,
-      birthDate:req.body.birthDate,
-      country:req.body.country,
-      gender:req.body.gender
+  //récupère les données de l'utilisateur
+	var response = {
+   	first_name:req.body.firstName,
+   	last_name:req.body.lastName,
+   	email:req.body.email,
+   	password:req.body.password,
+   	birthDate:req.body.birthDate,
+   	country:req.body.country,
+   	gender:req.body.gender,
+    cv:{}
   }
-   console.log(response);
-   res.redirect('/register');
-});
-/*
-//page CV
-app.get('/cv', function(req, res) {
-	res.render('ajoutCV.html');
+
+  //insère les données dans la db et crée la session d'utilisateur
+  //vérifie d'abord si l'adresse email est déjà utilisée
+  db.get('users').findOne({email:response.email},
+    (err, doc) => {
+      if (err) {//erreur lors de la recherche dans la base de donnée
+        res.send(err);
+      }
+      else{
+        if(doc){//mail déjà utilisé
+          //TODO:message d'erreur
+          console.log("erreur, mail deja utilise");
+        }
+        else{
+          db.get('users').insert(response,
+            (err, doc) => {
+              if (err) {//erreur lors de de l'insertion dans la base de donnée
+                res.send(err);
+              }
+              else {//success
+                req.session.user = doc;
+                res.redirect('/navigationCV');
+              }
+            }
+          );
+        }
+      }
+    }
+  );
 });
 
-//page Job
+//page ajouter CV
+app.get('/cv', function(req, res) {
+	res.render(__dirname + "/views/"+'ajoutCV.ejs');
+});
+app.post('/cv/add/',urlencodedParser, function(req, res){
+  var response = {
+    profil_image_upload:req.body.profile_image_upload,
+		firstnameCV:req.body.firstnameCV,
+    lasttnameCV:req.body.lasttnameCV,
+    emailCV:req.body.emailCV,
+		phoneCV:req.body.phoneCV,
+		qualifCV:req.body.qualifCV,
+    experienceCV:req.body.experienceCV,
+    localisationCV:req.body.localisationCV,
+    motherTongueCV:req.body.motherTongueCV,
+		sTongueCV:req.body.sTongueCV,
+		desciCV:req.body.desciCV,
+		motivCV:req.body.motivCV,
+		attemptsCV:req.body.attemptsCV
+  }
+  //change le cv de l'utilisateur en cours
+  db.get('users').findOneAndUpdate(req.session.user._id, {cv:response}).then(
+    (err, doc) => {
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.redirect('/navigationCV');
+      }
+    }
+  );
+});
+
+//page ajouter Job
 app.get('/job', function(req, res) {
-	res.render('ajoutJob.html');
+	res.render(__dirname + "/views/"+'ajoutJob.ejs');
+});
+app.post('/job/add/',urlencodedParser, function(req, res){
+  var response = {
+    user_id: req.user.session._id,
+		profil_image_upload2:req.body.profile_image_upload2,
+		companyname:req.body.companyname,
+		emailComp:req.body.emailComp,
+		phoneComp:req.body.phoneComp,
+		experienceComp:req.body.experienceCV,
+		localisationComp:req.body.localisationCV,
+		sTongueComp:req.body.sTongueComp,
+		salary:req.body.salary,
+		temp:req.body.temp,
+		grad:req.body.grad,
+		descrComp:req.body.descrComp
+  }
+  db.get('job').insert(response,
+    (err, doc) => {
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.redirect('/navigationCV');
+      }
+    }
+  );
 });
 
 //navigation cv
 app.get('/navigationCV', function(req, res) {
-	res.render('navigationCV.html');
+	res.render(__dirname + "/views/"+'navigationCV.ejs');
 });
 
 //navigation job
 app.get('/navigationJob', function(req, res) {
-	res.render('navigationJob.html');
+	res.render(__dirname + "/views/"+'navigationJob.ejs');
 });
 
 //404
 app.use(function(req, res, next){
-	res.redirect('/');
-});*/
+});
 
 /*
 app.get('/:pagename', function(req, res) {
