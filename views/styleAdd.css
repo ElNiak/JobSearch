@@ -1,4 +1,18 @@
+.LOGO
+{
+background-image: url('images2/LogoJobSearch.png');
+background-repeat: no-repeat;
+background-position: left top ;
+position:absolute;
+}
 
+.imagehome{
+background-image: url('images2/imagehome.jpg');
+background-repeat: no-repeat;
+background-position: top; 
+position:absolute;
+
+}
 
 .center {
      float: none;

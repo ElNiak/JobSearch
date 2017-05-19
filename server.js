@@ -160,7 +160,7 @@ app.post('/navigationCV/search/',urlencodedParser, function(req, res){
       res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
     }
   );
-}
+});
 
 //page ajouter Job
 app.get('/job', function(req, res) {
@@ -173,8 +173,8 @@ app.post('/job/add/',urlencodedParser, function(req, res){
     companyname:req.body.companyname,
     emailComp:req.body.emailComp,
     phoneComp:req.body.phoneComp,
-    experienceComp:req.body.experienceCV,
-    localisationComp:req.body.localisationCV,
+    experienceComp:req.body.experienceComp,
+    localisationComp:req.body.localisationComp,
     sTongueComp:req.body.sTongueComp,
     salary:req.body.salary,
     temp:req.body.temp,
@@ -213,7 +213,7 @@ app.post('/navigationJob/search/',urlencodedParser, function(req, res){
         res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
     }
   );  
-}
+});
 
 //404
 app.use(function(req, res, next){
