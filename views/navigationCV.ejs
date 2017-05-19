@@ -152,13 +152,13 @@
             </div>
           </div>
           <ul>
-            <% cvlist.forEach(function(cvO) { %>
-            <div class="col-md-10 blogShort">
+            <% cvlist.forEach(function(cvO) { if(cvO.cv){ %>
+            <div class="col-md-10 blogShort"> 
               <h1> <%= cvO.cv.firstnameCV %> <%= cvO.cv.lasttnameCV %> </h1>
-              <article><p> <%= cvO.cv.sectorCV %>, <%=  cvO.cv.experience %> années d'expériences</article></p>
+              <article><p> <%= cvO.cv.sectorCV %>, <%=  cvO.cv.experienceCV %> années d'expériences</article></p>
               <a class="btn btn-blog pull-right marginBottom10" href="/cv/show/<%cvO._id%>">READ MORE</a>
             </div>
-            <% });%>
+            <% }});%>
           </ul>
         </body>
         </html>

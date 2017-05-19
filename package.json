@@ -8,6 +8,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "flat": "^2.0.1",
     "mongodb": "^2.2.26",
     "monk": "^4.0.0"
   }

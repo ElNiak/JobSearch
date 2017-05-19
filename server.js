@@ -42,7 +42,7 @@ app.get('/', function(req, res) {
 app.post('/login', urlencodedParser, function(req, res){  
   var response = {
     email:req.body.email,
-    password: req.body.password
+    password:req.body.password
   }
   db.get('users').findOne(response,
     (doc) => {
