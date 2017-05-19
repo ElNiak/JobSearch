@@ -9,6 +9,7 @@ var db = monk('localhost:27017/JobSearch');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var app = express();
 
+app.set('view engine', 'ejs');
 app.use(express.static('views'));
 app.use(session({
     secret: "cookie_secret",
@@ -18,6 +19,12 @@ app.use(session({
     saveUninitialized: false,
     maxAge : 24*60*60*1000 //cookie kept for a day
 }));
+app.use(function(req, res, next){
+    if (typeof(req.session.user) == 'undefined') {
+        req.session.user = {}
+    }
+    next();
+})
 
 //page d'accueil
 app.get('/', function(req, res) {
@@ -71,7 +78,6 @@ app.post('/register/add/',urlencodedParser, function(req, res){
    	gender:req.body.gender,
     cv:{}
   }
-
   //insère les données dans la db et crée la session d'utilisateur
   //vérifie d'abord si l'adresse email est déjà utilisée
   db.get('users').findOne({email:response.email},
@@ -81,8 +87,7 @@ app.post('/register/add/',urlencodedParser, function(req, res){
       }
       else{
         if(doc){//mail déjà utilisé
-          //TODO:message d'erreur
-          console.log("erreur, mail deja utilise");
+          res.render(__dirname + "/views/"+'register.ejs',{message: 'Adresse mail déjà utilisée'});
         }
         else{
           db.get('users').insert(response,
@@ -120,7 +125,8 @@ app.post('/cv/add/',urlencodedParser, function(req, res){
 		sTongueCV:req.body.sTongueCV,
 		desciCV:req.body.desciCV,
 		motivCV:req.body.motivCV,
-		attemptsCV:req.body.attemptsCV
+		attemptsCV:req.body.attemptsCV,
+    sectorCV:req.body.sectorCV2
   }
   //change le cv de l'utilisateur en cours
   db.get('users').findOneAndUpdate(req.session.user._id, {cv:response}).then(
@@ -134,25 +140,47 @@ app.post('/cv/add/',urlencodedParser, function(req, res){
     }
   );
 });
+//navigation cv
+app.get('/navigationCV', function(req, res) {
+  db.get('users').find({},'cv').then(
+    (doc) => {
+      res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
+    }
+  );
+});
+//recherche cv
+app.post('/navigationCV/search/',urlencodedParser, function(req, res){
+  var response = {
+    sectorCV:req.body.sectorCV,
+    experienceCV:req.body.expeCV,
+    localisationCV: req.body.locCV
+  }
+  db.get('users').find({},'cv').then(
+    (doc) => {
+      res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
+    }
+  );
+}
 
 //page ajouter Job
 app.get('/job', function(req, res) {
-	res.render(__dirname + "/views/"+'ajoutJob.ejs');
+  res.render(__dirname + "/views/"+'ajoutJob.ejs');
 });
 app.post('/job/add/',urlencodedParser, function(req, res){
   var response = {
     user_id: req.user.session._id,
-		profil_image_upload2:req.body.profile_image_upload2,
-		companyname:req.body.companyname,
-		emailComp:req.body.emailComp,
-		phoneComp:req.body.phoneComp,
-		experienceComp:req.body.experienceCV,
-		localisationComp:req.body.localisationCV,
-		sTongueComp:req.body.sTongueComp,
-		salary:req.body.salary,
-		temp:req.body.temp,
-		grad:req.body.grad,
-		descrComp:req.body.descrComp
+    profil_image_upload2:req.body.profile_image_upload2,
+    companyname:req.body.companyname,
+    emailComp:req.body.emailComp,
+    phoneComp:req.body.phoneComp,
+    experienceComp:req.body.experienceCV,
+    localisationComp:req.body.localisationCV,
+    sTongueComp:req.body.sTongueComp,
+    salary:req.body.salary,
+    temp:req.body.temp,
+    grad:req.body.grad,
+    descrComp:req.body.descrComp,
+    sectorComp: req.body.sectorComp
   }
   db.get('job').insert(response,
     (err, doc) => {
@@ -165,16 +193,27 @@ app.post('/job/add/',urlencodedParser, function(req, res){
     }
   );
 });
-
-//navigation cv
-app.get('/navigationCV', function(req, res) {
-	res.render(__dirname + "/views/"+'navigationCV.ejs');
-});
-
 //navigation job
 app.get('/navigationJob', function(req, res) {
-	res.render(__dirname + "/views/"+'navigationJob.ejs');
+  db.get('job').find().then(
+    (doc) => {
+        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
+    }
+  );	
 });
+//recherche job
+app.post('/navigationJob/search/',urlencodedParser, function(req, res){
+  var response = {
+    sectorComp:req.body.sectorComp,
+    experienceComp:req.body.experienceComp,
+    localisationComp: req.body.locComp
+  }
+  db.get('job').find(response).then(
+    (doc) => {
+        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
+    }
+  );  
+}
 
 //404
 app.use(function(req, res, next){

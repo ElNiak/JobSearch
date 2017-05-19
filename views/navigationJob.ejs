@@ -8,34 +8,34 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <style>
-  .search {
-    margin-top: 0px;
+    .search {
+      margin-top: 0px;
 
-  }
-  .search .form-section{
-    background:rgba(0,0,0,0.6);
-    position:relative;
-    border: 2px solid #414141;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  .serchtile{
-    color:#fff;
-  }
+    }
+    .search .form-section{
+      background:rgba(0,0,0,0.6);
+      position:relative;
+      border: 2px solid #414141;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .serchtile{
+      color:#fff;
+    }
   </style>
   <style type="text/css">
-  input.hidden {
-    position: absolute;
-    left: -9999px;
-  }
+    input.hidden {
+      position: absolute;
+      left: -9999px;
+    }
 
-  #profile-image1 {
-    cursor: pointer;
-    width: 100px;
-    height: 100px;
-    border:2px solid #FBA01B ;}
-    .tital{ font-size:16px; font-weight:600;}
-    .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
+    #profile-image1 {
+      cursor: pointer;
+      width: 100px;
+      height: 100px;
+      border:2px solid #FBA01B ;}
+      .tital{ font-size:16px; font-weight:600;}
+      .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -45,16 +45,16 @@
       <div id="banner">
         <div id="banner_contents">
           <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Logout</a></li>
             <li class="dropdown">
-              <a  class="dropbtn">Navigation</a>
+              <a  class="dropbtn">Listes</a>
               <div class="dropdown-content">
-                <a href="#">Searcher</a>
-                <a href="#">Giver</a>
+                <a href="/navigationCV">CVs</a>
+                <a href="/navigationJob">Offres</a>
               </div>
             </li>
-            <li><a href="ajoutCV.html">Add CV</a></li>
-            <li><a href="#">Add Jobs</a></li>
+            <li><a href="/cv">Add CV</a></li>
+            <li><a href="/job">Add Jobs</a></li>
           </ul>
         </div>
       </div>
@@ -67,21 +67,31 @@
           <div class="col-md-10 col-md-offset">
             <div class="form-section">
               <div class="row">
-                <form role="form">
+                <form action="/navigationJob/search/" class="form-horizontal" role="form" method="post">
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="serchtile">I'm Looking</div>
                       <label class="sr-only" for="looking">I'm looking</label>
-                      <select id="selectbasic" name="selectbasic" class="form-control">
-                        <option value="1">Administration</option>
-                        <option value="2">Agriculture</option>
-                        <option value="3">Artisanat</option>
-                        <option value="4">Gestion</option>
-                        <option value="5">Economie</option>
-                        <option value="6">Enseignement</option>
-                        <option value="7">IT, R&D</option>
-                        <option value="8">Vente</option>
-                        <option value="9">Securite</option>
+                      <select id="sectorComp" name="sectorComp" class="form-control">
+                        <option value="Administration">Administration</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Artisanat">Artisanat</option>
+                        <option value="Gestion">Gestion</option>
+                        <option value="Economie">Economie, banque</option>
+                        <option value="Enseignement">Enseignement</option>
+                        <option value="IT">IT, R&D</option>
+                        <option value="Vente">Vente</option>
+                        <option value="Securite">Securite</option>
+                        <option value="Sante">Sante, medecine</option>
+                        <option value="Social">Social</option>
+                        <option value="Conception">Conception & architecture</option>
+                        <option value="Direction">Direction general</option>
+                        <option value="Marketing">Marketing et publicite</option>
+                        <option value="Media">Media & information</option>
+                        <option value="Droit">Droit</option>
+                        <option value="Horeca">Horeca</option>
+                        <option value="Tourisme">Tourisme</option>
+                        <option value="Construction">Construction</option>
                       </select>
                     </div>
                   </div>
@@ -90,7 +100,7 @@
                       <div class="serchtile">Minimum of experience</div>
                       <label class="sr-only" for="expe">Minimum of experience</label>
                       <div class="input-group">
-                        <select id="age" name="age" class="form-control">
+                        <select id="expeComp" name="expeComp" class="form-control">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -116,18 +126,24 @@
                         <div class="serchtile">Localisation</div>
                         <label class="sr-only" for="toage">Localisation</label>
                         <div class="input-group">
-                          <select id="age" name="toage" class="form-control">
-                            <option value="Luxembourg">Luxembourg</option>
-                            <option value="Hainaux">Hainaux</option>
+                          <select id="locComp" name="locComp" class="form-control">
                             <option value="Anvers">Anvers</option>
-                            <option value="Bruxelles">Bruxelles</option>
-                            <option value="Liege">Liege</option>
+                            <option value="Limbourg">Limbourg</option>
+                            <option value="Flandre orientale">Flandre orientale</option>
+                            <option value="Brabant flamand">Brabant flamand</option>
+                            <option value="Flandre occidentale">Flandre occidentale</option>
+                            <option value="Brabant wallon">Brabant wallon</option>
+                            <option value="Hainaux">Hainaux</option>
+                            <option value="Liège">Liège</option>
+                            <option value="Luxembourg">Luxembourg</option>
+                            <option value="Namur">Namur</option>
+                            <option value="Bruxelle">Bruxelle capitale</option>
                           </select>  </div>
                         </div>
                       </div>
                       <div class="col-md-2">
                         <br>
-                        <button type="submit" class="btn btn-default btn-primary">Search</button>
+                        <button type="search" class="btn btn-default btn-primary">Search</button>
                       </div>
                     </form>
                   </div>
@@ -136,46 +152,18 @@
             </div>
           </div>
           <div class="col-md-10 blogShort">
-            <h1>Title 1</h1>
-            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/guinnes-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
-
-            <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>
-            <article><p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-              five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-              of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p></article>
-            <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a>
-          </div>
-
-          <div class="col-md-10 blogShort">
-            <h1>Title 2</h1>
-            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_4073-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
-            <article><p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-              five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-              of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p></article>
-            <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a>
-          </div>
-
-          <div class="col-md-10 blogShort">
-            <h1>Title 3</h1>
-            <img src="http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/DSC_1681-150x150.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
-            <article><p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-              five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-              of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p></article>
-            <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a>
+            <ul
+>              <% joblist.forEach(function(job) { %>
+              <li>
+                <h1> <%= job.experienceComp %> </h1>
+                <img src=job.profil_image_upload2>
+                <article><p> <%= job.descrComp %> </p></article>
+                <a class="btn btn-blog pull-right marginBottom10" href="/job/show/<%job._id%>">READ MORE</a>
+              </li>
+              <% });%>
+            </ul>
           </div>
         </div>
-
       </body>
       </html>
+

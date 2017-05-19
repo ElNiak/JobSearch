@@ -30,23 +30,23 @@
       <div id="banner">
         <div id="banner_contents">
           <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Logout</a></li>
             <li class="dropdown">
-              <a  class="dropbtn">Navigation</a>
+              <a  class="dropbtn">Listes</a>
               <div class="dropdown-content">
-                <a href="#">Searcher</a>
-                  <a href="navigationJob.html">Giver</a>
+                <a href="/navigationCV">CVs</a>
+                <a href="/navigationJob">Offres</a>
               </div>
             </li>
-            <li><a href="ajoutCV.html">Add CV</a></li>
-            <li><a href="#">Add Jobs</a></li>
+            <li><a href="/cv">Add CV</a></li>
+            <li><a href="/job">Add Jobs</a></li>
           </ul>
-          </div>
         </div>
       </div>
+    </div>
 
     <div class="container" align="center">
-      <form class="form-horizontal">
+      <form action="/job/add/" class="form-horizontal" role="form" method="post">
         <div class="row-xs-10">
           <div class="col-md-10 ">
             <div class="panel panel-default" >
@@ -57,7 +57,7 @@
                     <div class="col-sm-12">
                       <div  align="center">
                         <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" align="center">
-                        <input id="profile-image-upload" class="hidden" type="file">
+                        <input id="profile_image_upload2" name="profile_image_upload2" class="hidden" type="file">
                         <div style="color:#999;" >click here to change company image</div>
                       </div>
                       <br>
@@ -69,7 +69,7 @@
                       <div class="required-field-block" >
                         <label>Company Name :</label>
                         <div class="input-group">
-                          <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="First name" required>
+                          <input type="text" class="form-control" name="companyname" id="companyname" placeholder="First name" required>
                           <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                         </div>
                       </div>
@@ -79,7 +79,7 @@
                       <div class="required-field-block">
                         <label>Email :</label>
                         <div class="input-group">
-                          <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Email" required>
+                          <input type="text" class="form-control" name="emailComp" id="emailComp" placeholder="Email" required>
                           <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                         </div>
                       </div>
@@ -87,7 +87,7 @@
                     <div class="col-sm-6 col-xs-6 "  align="center">
                       <label>Professional phone :</label>
                       <div class="input-group">
-                        <input type="text" placeholder="Phone" class="form-control">
+                        <input type="text" placeholder="Phone" class="form-control" name="phoneComp" id="phoneComp">
                         <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                       </div>
                     </div>
@@ -95,7 +95,7 @@
                       <div class="required-field-block" >
                         <label>Experience required :</label>
                         <div class="input-group">
-                          <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Your experience" required>
+                          <input type="text" class="form-control" name="experienceComp" id="experienceComp" placeholder="Your experience" required>
                           <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                         </div>
                       </div>
@@ -116,7 +116,7 @@
                   <div class="required-field-block">
                     <label>Langage required :</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Mother tongue" required>
+                      <input type="text" class="form-control" name="sTongueComp" id="sTongueComp" placeholder="Mother tongue" required>
                       <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
                   </div>
@@ -124,17 +124,28 @@
                 <div class="col-sm-6 col-xs-6 "  align="center">
                   <div class="required-field-block" >
                     <label>Localisation :</label>
-                    <div class="input-group">
-                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Localisation" required>
-                      <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
-                    </div>
+                    <div class="form-group">
+                        <select id="localisationComp" name="localisationComp" class="form-control">
+                          <option value="Anvers">Anvers</option>
+                          <option value="Limbourg">Limbourg</option>
+                          <option value="Flandre orientale">Flandre orientale</option>
+                          <option value="Brabant flamand">Brabant flamand</option>
+                          <option value="Flandre occidentale">Flandre occidentale</option>
+                          <option value="Brabant wallon">Brabant wallon</option>
+                          <option value="Hainaux">Hainaux</option>
+                          <option value="Liège">Liège</option>
+                          <option value="Luxembourg">Luxembourg</option>
+                          <option value="Namur">Namur</option>
+                          <option value="Bruxelle">Bruxelle capitale</option>
+                        </select>
+                  </div>
                   </div>
                 </div>
                 <div class="col-sm-6 col-xs-6 "  align="center">
                   <div class="required-field-block">
                     <label>Salary proposed :</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Mother tongue" required>
+                      <input type="text" class="form-control" name="salary" id="salary" placeholder="Mother tongue" required>
                       <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
                   </div>
@@ -143,18 +154,17 @@
                   <div class="required-field-block" >
                     <label>Duration and schedule :</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Localisation" required>
+                      <input type="text" class="form-control" name="temp" id="temp" placeholder="Localisation" required>
                       <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
+
                 <div class="col-sm-12 col-xs-6 "  align="center">
                   <div class="required-field-block">
                     <label>Graduations required :</label>
                     <div class="input-group">
-                      <textarea rows="4" class="form-control" placeholder="Message"></textarea>
+                      <textarea rows="4" class="form-control" placeholder="Message" name="grad" id="grad"></textarea>
                       <span class="input-group-addon succes">
                         <span class="glyphicon glyphicon-remove">
                         </span>
@@ -166,7 +176,7 @@
                   <div class="required-field-block">
                     <label>Small descritpion and attemps :</label>
                     <div class="input-group">
-                      <textarea rows="4" class="form-control" placeholder="Message"></textarea>
+                      <textarea rows="4" class="form-control" placeholder="Message"name="descrComp" id="descrComp"></textarea>
                       <span class="input-group-addon succes">
                         <span class="glyphicon glyphicon-remove">
                         </span>
@@ -178,7 +188,7 @@
               </div>
 
             </div>
-            <button type="button" class="btn-lg">Submit</button>
+            <button type="submit" class="btn-lg">Submit</button>
             <div class="clearfix"></div>
             <div class="bot-border"></div>
           </div>
