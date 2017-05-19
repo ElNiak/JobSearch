@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 //page d'accueil
 app.get('/home', function(req, res) {
-	res.render(__dirname + "/views/"+'accueil.ejs');
+	res.render(__dirname + "/views/"+'acceuil.ejs');
 });
 
 //register
@@ -116,6 +116,33 @@ app.post('/navigationJob/add/',urlencodedParser, function(req, res){
 	//var job = db.job.find(responseSearch);
   res.redirect('/job');
 });
+
+app.get('/viewJob', function(req, res) {
+	res.render(__dirname + "/views/"+'viewJob.ejs');
+});
+app.post('/navigationJob/add/',urlencodedParser, function(req, res){
+	var responseSearch = {
+		sectorCV:req.body.sectorCV,
+		expeCV:req.body.expeCV,
+		locCV:req.body.locCV
+	}
+	//var job = db.job.find(responseSearch);
+  res.redirect('/job');
+});
+
+app.get('/viewCV', function(req, res) {
+	res.render(__dirname + "/views/"+'viewCV.ejs');
+});
+app.post('/navigationJob/add/',urlencodedParser, function(req, res){
+	var responseSearch = {
+		sectorCV:req.body.sectorCV,
+		expeCV:req.body.expeCV,
+		locCV:req.body.locCV
+	}
+	//var job = db.job.find(responseSearch);
+  res.redirect('/job');
+});
+
 //404
 app.use(function(req, res, next){
 });
