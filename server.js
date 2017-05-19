@@ -45,18 +45,13 @@ app.post('/login', urlencodedParser, function(req, res){
     password: req.body.password
   }
   db.get('users').findOne(response,
-    (err, doc) => {
-      if (err) {//erreur lors de la recherche dans la base de donnée
-        res.send(err);
+    (doc) => {
+      if(doc){//on a trouvé un utilisateur correspondant
+        req.session.user = doc;
+        res.redirect('/navigationJob');
       }
-      else {
-        if(doc){//on a trouvé un utilisateur correspondant
-          req.session.user = doc;
-          res.redirect('/navigationJob');
-        }
-        else{//aucun utilisateur correspondant dans la base de donnée
-          res.redirect('/', {message: "Invalid credentials!"});//TODO afficher message
-        }
+      else{//aucun utilisateur correspondant dans la base de donnée
+        res.redirect('/', {message: "Invalid credentials!"});//TODO afficher message
       }
     }
   );  
@@ -81,27 +76,22 @@ app.post('/register/add/',urlencodedParser, function(req, res){
   //insère les données dans la db et crée la session d'utilisateur
   //vérifie d'abord si l'adresse email est déjà utilisée
   db.get('users').findOne({email:response.email},
-    (err, doc) => {
-      if (err) {//erreur lors de la recherche dans la base de donnée
-        res.send(err);
+    (doc) => {
+      if(doc){//mail déjà utilisé
+        res.render(__dirname + "/views/"+'register.ejs',{message: 'Adresse mail déjà utilisée'});
       }
       else{
-        if(doc){//mail déjà utilisé
-          res.render(__dirname + "/views/"+'register.ejs',{message: 'Adresse mail déjà utilisée'});
-        }
-        else{
-          db.get('users').insert(response,
-            (err, doc) => {
-              if (err) {//erreur lors de de l'insertion dans la base de donnée
-                res.send(err);
-              }
-              else {//success
-                req.session.user = doc;
-                res.redirect('/navigationCV');
-              }
+        db.get('users').insert(response,
+          (err, doc) => {
+            if (err) {//erreur lors de de l'insertion dans la base de donnée
+              res.send(err);
             }
-          );
-        }
+            else {//success
+              req.session.user = doc;
+              res.redirect('/navigationCV');
+            }
+          }
+        );
       }
     }
   );
@@ -130,13 +120,8 @@ app.post('/cv/add/',urlencodedParser, function(req, res){
   }
   //change le cv de l'utilisateur en cours
   db.get('users').findOneAndUpdate(req.session.user._id, {cv:response}).then(
-    (err, doc) => {
-      if (err) {
-        res.send(err);
-      }
-      else {
-        res.redirect('/navigationCV');
-      }
+    (doc) => {
+      res.redirect('/navigationCV');
     }
   );
 });
