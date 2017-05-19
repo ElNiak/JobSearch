@@ -36,7 +36,7 @@ app.get('/', function(req, res) {
       }
     });
   }
-	res.render(__dirname + "/views/"+'accueil.ejs');
+	res.render(__dirname + "/views/"+'accueil.ejs', {message:""});
 });
 //action: login
 app.post('/login', urlencodedParser, function(req, res){  
@@ -51,7 +51,7 @@ app.post('/login', urlencodedParser, function(req, res){
         res.redirect('/navigationJob');
       }
       else{//aucun utilisateur correspondant dans la base de donnée
-        res.redirect('/', {message: "Invalid credentials!"});//TODO afficher message
+        res.render(__dirname + "/views/"+'accueil.ejs', {message: "Invalid credentials!"});//TODO afficher message
       }
     }
   );  
@@ -119,7 +119,7 @@ app.post('/cv/add/',urlencodedParser, function(req, res){
     sectorCV:req.body.sectorCV2
   }
   //change le cv de l'utilisateur en cours
-  db.get('users').findOneAndUpdate(req.session.user._id, {cv:response}).then(
+  db.get('users').findOneAndUpdate({email:response.emailCV}, {cv:response}).then(
     (doc) => {
       res.redirect('/navigationCV');
     }
@@ -146,6 +146,12 @@ app.post('/navigationCV/search/',urlencodedParser, function(req, res){
     }
   );
 });
+app.get('/cv/show/:id', function(req,res){
+  db.get('users').findOne({'cv._id':id}).then(
+    (doc) =>{
+      res.render(__dirname + "/views/"+'viewCV.ejs',{cv:doc})
+    })
+});
 
 //page ajouter Job
 app.get('/job', function(req, res) {
@@ -153,7 +159,6 @@ app.get('/job', function(req, res) {
 });
 app.post('/job/add/',urlencodedParser, function(req, res){
   var response = {
-    user_id: req.user.session._id,
     profil_image_upload2:req.body.profile_image_upload2,
     companyname:req.body.companyname,
     emailComp:req.body.emailComp,
@@ -195,9 +200,15 @@ app.post('/navigationJob/search/',urlencodedParser, function(req, res){
   }
   db.get('job').find(response).then(
     (doc) => {
-        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
+      res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
     }
   );  
+});
+app.get('/job/show/:id', function(req,res){
+  db.get('job').findOne( {_id:id}).then(
+    (doc) =>{
+      res.render(__dirname + "/views/"+'viewCV.ejs',{job:doc})
+    })
 });
 
 //404

@@ -155,9 +155,13 @@
             <ul
 >              <% joblist.forEach(function(job) { %>
               <li>
-                <h1> <%= job.experienceComp %> </h1>
+                <h1> <%= job.companyname %> </h1>
                 <img src=job.profil_image_upload2>
-                <article><p> <%= job.descrComp %> </p></article>
+                <article>
+                  <p> Domaine: <%= job.sectorComp %>  </p>
+                  <p> Nombre d'années d'expérience requises: <%= job.experienceComp %> </p>
+                  <p> <%= job.descrComp %> </p>
+                </article>
                 <a class="btn btn-blog pull-right marginBottom10" href="/job/show/<%job._id%>">READ MORE</a>
               </li>
               <% });%>

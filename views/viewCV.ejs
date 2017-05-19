@@ -1,0 +1,191 @@
+
+<html>
+<head>
+  <title>JobSearch</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link href="styleAdd.css" rel="stylesheet" type="text/css" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <style type="text/css">
+  input.hidden {
+    position: absolute;
+    left: -9999px;
+  }
+
+  #profile-image1 {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border:2px solid #FBA01B ;}
+    .tital{ font-size:16px; font-weight:600;}
+    .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div id="topPan">
+      <div id="banner">
+        <div id="banner_contents">
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li class="dropdown">
+              <a  class="dropbtn">Navigation</a>
+              <div class="dropdown-content">
+                <a href="/navigationCV">Searcher</a>
+                <a href="/navigationJob">Giver</a>
+              </div>
+            </li>
+            <li><a href="#">Add CV</a></li>
+            <li><a href="/job">Add Jobs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" align="center">
+      <form action="/job/add/" class="form-horizontal" role="form" method="post">
+        <div class="row">
+          <div class="col-sm-12 col-xs-10">
+            <div class="panel panel-default" >
+              <div class="panel-heading">  <h4 >Your job offer</h4></div>
+              <div class="panel-body">
+                <div class="box box-info">
+                  <div class="box-body">
+                    <div class="col-sm-20">
+                      <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" align="center">
+
+                    </div>
+                    <hr style="margin:1px 0 1px 0;">
+                    <div class="col-sm-6 col-xs-4 "  >
+                      <div class="required-field-block" id="firstnameCVv" name="firstnameCVv" >
+                        <label>First name :</label>
+                        Christophe
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-4 "  >
+                      <div class="required-field-block" id="expeCV" name="expeCV">
+                        <label>Last name :</label>
+                        Crochet
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+
+                    <div class="col-sm-6 col-xs-4" id="expeCV" name="expeCV" >
+                      <label>Email :</label>
+                      christophe.job@job.com
+                    </div>
+                    <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV" >
+                      <label>Professional phone :</label>
+                      06485454979
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+                    <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV">
+                      <div class="required-field-block" >
+                        <label>Higher qualifications :</label>
+                        IT security master
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-4 id="expeCV" name="expeCV"">
+                      <div class="required-field-block" >
+                        <label>Graduations :</label>
+                        CEB
+                        CESS
+                        IT security
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+                    <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV">
+                      <div class="required-field-block">
+                        <label>Mother tongue :</label>
+                        Francais
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV">
+                      <div class="required-field-block">
+                        <label>Secondary tongue :</label>
+                        English
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+
+                    <div class="col-sm-4 col-xs-4 " id="expeCV" name="expeCV">
+                      <div class="required-field-block" >
+                        <label>Localisation :</label>
+                        Anvers
+                      </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-4 ">
+                      <div class="required-field-block">
+                        <label>Domain required :</label>
+                        IT security
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-6 " id="expeCV" name="expeCV" >
+                      <div class="required-field-block">
+                        <label>Experience in this domain :</label>
+                       5+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="bot-border"></div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+                <div class="col-sm-12 col-xs-3 " align="center" id="expeCV" name="expeCV">
+                  <div class="required-field-block">
+                    <label>Small descritpion:</label>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
+                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+                    of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
+                    Lorem Ipsum.
+                  </div>
+                </div>
+                <div class="col-sm-12 col-xs-3 " align="center" id="expeCV" name="expeCV">
+                  <div class="required-field-block">
+                    <label>Motivation & quality:</label>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
+                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+                    of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
+                    Lorem Ipsum.
+                  </div>
+                </div>
+                <div class="col-sm-12 col-xs-3 " align="center" id="expeCV" name="expeCV">
+                  <div class="required-field-block">
+                    <label>Attempts:</label>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
+                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+                    of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
+                    Lorem Ipsum.
+                  </div>
+                </div>
+              </div>
+
+              <a type="button"  href="/navigationCV" class="btn-lg">Previous</a>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+            </div>
+            </div>
+
+
+
+
+        </div>
+      </form>
+      </div>
+
+</body>
+</html>
