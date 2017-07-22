@@ -12,13 +12,12 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
 app.use(session({
-    secret: "cookie_secret",
-    name: "cookie_name",
-    user: {},
+    secret: 'i dont have any',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     maxAge : 24*60*60*1000 //cookie kept for a day
 }));
+
 app.use(function(req, res, next){
     if (typeof(req.session.user) == 'undefined') {
         req.session.user = {}
@@ -40,18 +39,14 @@ app.get('/', function(req, res) {
 });
 //action: login
 app.post('/login', urlencodedParser, function(req, res){  
-  var response = {
-    email:req.body.email,
-    password:req.body.password
-  }
-  db.get('users').findOne(response,
+  db.get('users').findOne({email:req.body.email, password:req.body.password}).then(
     (doc) => {
       if(doc){//on a trouvé un utilisateur correspondant
-        req.session.user = doc;
+        req.session.user = doc.email;
         res.redirect('/navigationJob');
       }
       else{//aucun utilisateur correspondant dans la base de donnée
-        res.render(__dirname + "/views/"+'accueil.ejs', {message: "Invalid credentials!"});//TODO afficher message
+        res.render(__dirname + "/views/"+'accueil.ejs', {message: "Invalid credentials!"});
       }
     }
   );  
@@ -59,7 +54,7 @@ app.post('/login', urlencodedParser, function(req, res){
 
 //register
 app.get('/register', function(req, res) {
-	res.render(__dirname + "/views/"+'register.ejs');
+	res.render(__dirname + "/views/"+'register.ejs', {message: ""});
 });
 app.post('/register/add/',urlencodedParser, function(req, res){
   //récupère les données de l'utilisateur
@@ -70,24 +65,36 @@ app.post('/register/add/',urlencodedParser, function(req, res){
    	password:req.body.password,
    	birthDate:req.body.birthDate,
    	country:req.body.country,
-   	gender:req.body.gender,
-    cv:{}
+   	gender:req.body.gender
   }
   //insère les données dans la db et crée la session d'utilisateur
   //vérifie d'abord si l'adresse email est déjà utilisée
-  db.get('users').findOne({email:response.email},
+  db.get('users').findOne({email:response.email}).then(
     (doc) => {
       if(doc){//mail déjà utilisé
-        res.render(__dirname + "/views/"+'register.ejs',{message: 'Adresse mail déjà utilisée'});
+        res.render(__dirname + "/views/"+'register.ejs',{message: "Email already used by an account"});
       }
       else{
+        //ajoute l'utilisateur dans la base de donnée
         db.get('users').insert(response,
           (err, doc) => {
             if (err) {//erreur lors de de l'insertion dans la base de donnée
               res.send(err);
             }
             else {//success
-              req.session.user = doc;
+              req.session.user = doc.email;
+              console.log(req.session.user);
+            }
+          }
+        );
+
+        //ajoute un cv contenant juste l'adresse mail de l'utilisateur dans la base de donnée
+        db.get('cv').insert({emailCV:req.body.email},
+          (err, doc) => {
+            if (err) {//erreur lors de de l'insertion dans la base de donnée
+              res.send(err);
+            }
+            else {//success
               res.redirect('/navigationCV');
             }
           }
@@ -99,6 +106,7 @@ app.post('/register/add/',urlencodedParser, function(req, res){
 
 //page ajouter CV
 app.get('/cv', function(req, res) {
+  console.log(req.session.user);
 	res.render(__dirname + "/views/"+'ajoutCV.ejs');
 });
 app.post('/cv/add/',urlencodedParser, function(req, res){
@@ -119,37 +127,45 @@ app.post('/cv/add/',urlencodedParser, function(req, res){
     sectorCV:req.body.sectorCV2
   }
   //change le cv de l'utilisateur en cours
-  db.get('users').findOneAndUpdate({email:response.emailCV}, {cv:response}).then(
+  db.get('cv').findOneAndUpdate({emailCV:response.emailCV}, response).then(
     (doc) => {
-      res.redirect('/navigationCV');
+      res.redirect('/navigationCV');//TODO: rien trouvé
     }
   );
 });
 //navigation cv
 app.get('/navigationCV', function(req, res) {
-  db.get('users').find({},'cv').then(
+  db.get('cv').find().then(
     (doc) => {
       res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
     }
   );
 });
 //recherche cv
-app.post('/navigationCV/search/',urlencodedParser, function(req, res){
-  var response = {
-    sectorCV:req.body.sectorCV,
-    experienceCV:req.body.expeCV,
-    localisationCV: req.body.locCV
-  }
-  db.get('users').find({},'cv').then(
+app.post('/navigationCV/search',urlencodedParser, function(req, res){
+  db.get('cv').find({sectorCV:req.body.sectorCV,
+    experienceCV:req.body.experienceCV,
+    localisationCV:req.body.localisationCV}).then(
     (doc) => {
-      res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
+      if(doc){
+        res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
+      }
+      else{
+        res.redirect('/navigationCV');//TODO:rien trouvé
+      }
     }
   );
 });
 app.get('/cv/show/:id', function(req,res){
-  db.get('users').findOne({'cv._id':id}).then(
+  var id = req.params.id;
+  db.get('cv').findOne({'_id':id}).then(
     (doc) =>{
-      res.render(__dirname + "/views/"+'viewCV.ejs',{cv:doc})
+      if(doc){
+        res.render(__dirname + "/views/"+'viewCV.ejs',{cv:doc})
+      }
+      else{
+        res.render(__dirname + "/views/"+'navigationCV.ejs');
+      }
     })
 });
 
@@ -192,22 +208,23 @@ app.get('/navigationJob', function(req, res) {
   );	
 });
 //recherche job
-app.post('/navigationJob/search/',urlencodedParser, function(req, res){
+app.post('/navigationJob/search',urlencodedParser, function(req, res){
   var response = {
     sectorComp:req.body.sectorComp,
     experienceComp:req.body.experienceComp,
-    localisationComp: req.body.locComp
-  }
+    localisationComp: req.body.localisationComp
+  };
   db.get('job').find(response).then(
     (doc) => {
-      res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
+      res.render(__dirname + "/views/"+'navigationJobSearch.ejs',{joblist:doc});
     }
   );  
 });
 app.get('/job/show/:id', function(req,res){
+  var id = req.params.id;
   db.get('job').findOne( {_id:id}).then(
     (doc) =>{
-      res.render(__dirname + "/views/"+'viewCV.ejs',{job:doc})
+      res.render(__dirname + "/views/"+'viewJob.ejs',{job:doc})
     })
 });
 

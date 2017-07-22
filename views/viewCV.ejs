@@ -26,24 +26,6 @@
   </head>
 
   <body>
-    <div id="topPan">
-      <div id="banner">
-        <div id="banner_contents">
-          <ul>
-            <li><a href="/home">Home</a></li>
-            <li class="dropdown">
-              <a  class="dropbtn">Navigation</a>
-              <div class="dropdown-content">
-                <a href="/navigationCV">Searcher</a>
-                <a href="/navigationJob">Giver</a>
-              </div>
-            </li>
-            <li><a href="#">Add CV</a></li>
-            <li><a href="/job">Add Jobs</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
     <div class="container" align="center">
       <form action="/job/add/" class="form-horizontal" role="form" method="post">
@@ -62,13 +44,13 @@
                     <div class="col-sm-6 col-xs-4 "  >
                       <div class="required-field-block" id="firstnameCVv" name="firstnameCVv" >
                         <label>First name :</label>
-                        Christophe
+                        <%= cv.firstnameCV %>
                       </div>
                     </div>
                     <div class="col-sm-6 col-xs-4 "  >
                       <div class="required-field-block" id="expeCV" name="expeCV">
                         <label>Last name :</label>
-                        Crochet
+                        <%= cv.lasttnameCV %>
                       </div>
                     </div>
 
@@ -77,26 +59,18 @@
 
                     <div class="col-sm-6 col-xs-4" id="expeCV" name="expeCV" >
                       <label>Email :</label>
-                      christophe.job@job.com
+                      <%= cv.emailCV %>
                     </div>
                     <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV" >
                       <label>Professional phone :</label>
-                      06485454979
+                      <%= cv.phoneCV %>
                     </div>
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
                     <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV">
                       <div class="required-field-block" >
                         <label>Higher qualifications :</label>
-                        IT security master
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-4 id="expeCV" name="expeCV"">
-                      <div class="required-field-block" >
-                        <label>Graduations :</label>
-                        CEB
-                        CESS
-                        IT security
+                        <%= cv.qualifCV %>
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -104,13 +78,13 @@
                     <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV">
                       <div class="required-field-block">
                         <label>Mother tongue :</label>
-                        Francais
+                        <%= cv.motherTongueCV %>
                       </div>
                     </div>
                     <div class="col-sm-6 col-xs-4 " id="expeCV" name="expeCV">
                       <div class="required-field-block">
                         <label>Secondary tongue :</label>
-                        English
+                        <%= cv.sTongueCV %>
                       </div>
                     </div>
 
@@ -120,20 +94,20 @@
                     <div class="col-sm-4 col-xs-4 " id="expeCV" name="expeCV">
                       <div class="required-field-block" >
                         <label>Localisation :</label>
-                        Anvers
+                        <%= cv.localisationCV %>
                       </div>
                     </div>
                     <div class="col-sm-4 col-xs-4 ">
                       <div class="required-field-block">
                         <label>Domain required :</label>
-                        IT security
+                        <%= cv.sectorCV %>
                       </div>
                     </div>
 
                     <div class="col-sm-4 col-xs-6 " id="expeCV" name="expeCV" >
                       <div class="required-field-block">
                         <label>Experience in this domain :</label>
-                       5+
+                       <%= cv.experienceCV %>
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -144,32 +118,20 @@
                 </div>
                 <div class="col-sm-12 col-xs-3 " align="center" id="expeCV" name="expeCV">
                   <div class="required-field-block">
-                    <label>Small descritpion:</label>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                    of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-                    Lorem Ipsum.
+                    <label>Small description:</label>
+                    <%= cv.desciCV %>
                   </div>
                 </div>
                 <div class="col-sm-12 col-xs-3 " align="center" id="expeCV" name="expeCV">
                   <div class="required-field-block">
                     <label>Motivation & quality:</label>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                    of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-                    Lorem Ipsum.
+                    <%= cv.motivCV %>
                   </div>
                 </div>
                 <div class="col-sm-12 col-xs-3 " align="center" id="expeCV" name="expeCV">
                   <div class="required-field-block">
-                    <label>Attempts:</label>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                    of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-                    Lorem Ipsum.
+                    <label>Expectations:</label>
+                    <%= cv.attemptsCV %>
                   </div>
                 </div>
               </div>

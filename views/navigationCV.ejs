@@ -67,7 +67,7 @@
           <div class="col-md-10 col-md-offset">
             <div class="form-section">
               <div class="row">
-                <form action="/navigationCV/search/" class="form-horizontal" role="form" method="post">
+                <form action="/navigationCV/search" class="form-horizontal" role="form" method="post">
                   <div class="col-md-4" align="center">
                     <div class="form-group">
                       <div class="serchtile">I'm Looking</div>
@@ -97,8 +97,8 @@
                   </div>
                   <div class="col-md-3" align="center">
                     <div class="form-group">
-                      <div class="serchtile">Minimum of experience</div>
-                      <label class="sr-only" for="expe">Minimum of experience</label>
+                      <div class="serchtile">Years of experience</div>
+                      <label class="sr-only" for="expe">Years of experience</label>
                       <div class="input-group">
                         <select id="experienceCV" name="experienceCV" class="form-control">
                           <option value="1">1</option>
@@ -117,48 +117,56 @@
                           <option value="14">14</option>
                           <option value="15">15</option>
                           <option value="16">+</option>
-                        </select>  </div>
+                        </select>  
                       </div>
                     </div>
-
-                    <div class="col-md-3" align="center">
-                      <div class="form-group">
-                        <div class="serchtile">Localisation</div>
-                        <label class="sr-only" for="toage">Localisation</label>
-                        <div class="input-group">
-                          <select id="localisationCV" name="localisationCV" class="form-control">
-                            <option value="Anvers">Anvers</option>
-                            <option value="Limbourg">Limbourg</option>
-                            <option value="Flandre orientale">Flandre orientale</option>
-                            <option value="Brabant flamand">Brabant flamand</option>
-                            <option value="Flandre occidentale">Flandre occidentale</option>
-                            <option value="Brabant wallon">Brabant wallon</option>
-                            <option value="Hainaux">Hainaux</option>
-                            <option value="Liège">Liège</option>
-                            <option value="Luxembourg">Luxembourg</option>
-                            <option value="Namur">Namur</option>
-                            <option value="Bruxelle">Bruxelle capitale</option>
-                          </select>  </div>
-                        </div>
-                      </div>
-                      <div class="col-md-2" align="center">
-                        <br>
-                        <button type="search" class="btn btn-default btn-primary">Search</button>
-                      </div>
-                    </form>
                   </div>
-                </div>
+
+                  <div class="col-md-3" align="center">
+                    <div class="form-group">
+                      <div class="serchtile">Localisation</div>
+                      <label class="sr-only" for="toage">Localisation</label>
+                      <div class="input-group">
+                        <select id="localisationCV" name="localisationCV" class="form-control">
+                          <option value="Anvers">Anvers</option>
+                          <option value="Limbourg">Limbourg</option>
+                          <option value="Flandre orientale">Flandre orientale</option>
+                          <option value="Brabant flamand">Brabant flamand</option>
+                          <option value="Flandre occidentale">Flandre occidentale</option>
+                          <option value="Brabant wallon">Brabant wallon</option>
+                          <option value="Hainaux">Hainaux</option>
+                          <option value="Liège">Liège</option>
+                          <option value="Luxembourg">Luxembourg</option>
+                          <option value="Namur">Namur</option>
+                          <option value="Bruxelle">Bruxelle capitale</option>
+                        </select>  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2" align="center">
+                    <br>
+                    <button type="search" class="btn btn-default btn-primary">Search</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-          <ul>
-            <% cvlist.forEach(function(cvO) { if(cvO.cv){ %>
-            <div class="col-md-10 blogShort"> 
-              <h1> <%= cvO.cv.firstnameCV %> <%= cvO.cv.lasttnameCV %> </h1>
-              <article><p> <%= cvO.cv.sectorCV %>, <%=  cvO.cv.experienceCV %> années d'expériences</article></p>
-              <a class="btn btn-blog pull-right marginBottom10" href="/cv/show/<%cvO._id%>">READ MORE</a>
-            </div>
+        </div>
+      </div>
+      <div class="col-md-10 blogShort"> 
+        <ul>
+          <% cvlist.forEach(function(cv) { if(cv.firstnameCV){ %>
+          <li>
+            <h1> <%= cv.firstnameCV %> <%= cv.lasttnameCV %> </h1>
+            <article>
+              <p> <%= cv.sectorCV %>, <%=  cv.experienceCV %> years of experience 
+              </p>
+            </article>
+            <a class="btn btn-blog pull-right marginBottom10" href="/cv/show/<%= cv._id%>">READ MORE</a>
             <% }});%>
-          </ul>
-        </body>
-        </html>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
