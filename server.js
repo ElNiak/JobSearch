@@ -233,7 +233,7 @@ app.get('/messagerie', function(req, res) {
   res.render(__dirname + "/views/"+'messagerie.ejs',{message:""});
 });
 app.get('/boitemessage', function(req, res) {
-  db.get('message').find().then(
+  db.get('message').find({emailComp:req.session.user}).then(
     (doc) => {
         res.render(__dirname + "/views/"+'boitemessage.ejs',{messageList:doc, message:""});
     }

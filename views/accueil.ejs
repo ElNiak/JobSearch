@@ -1,9 +1,51 @@
   <!DOCTYPE html>
  <html>
-   <% include ./partials/head %>
+   <head>
+    <meta charset="utf-8" />
+      <title>JobSearch</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <link href="styleAdd.css" rel="stylesheet" type="text/css" />
+      <link href="navigationJob.css" rel="stylesheet" type="text/css" />
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+      <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+
+         .search {
+         margin-top: 235px;
+         }
+         .search .form-section{
+         background:rgba(0,0,0,0.6);
+         position:relative;
+         border: 2px solid #414141;
+         border-radius: 5px;
+         padding: 10px;
+         align-content: center;
+         text-align: center;
+         margin: auto;
+         }
+         .serchtile{
+         color:#fff;
+         }
+      </style>
+      <style type="text/css">
+         input.hidden {
+         position: absolute;
+         left: -9999px;
+         }
+         #profile-image1 {
+         cursor: pointer;
+         width: 100px;
+         height: 100px;
+         border:2px solid #FBA01B ;}
+         .tital{ font-size:16px; font-weight:600;}
+         .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
+      </style>
+      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+   </head>
    <body>
       <div class="LOGO"></div>
-    <div class="imagehome"></div>
+
       <div class="container">
       <div class="search">
       <div class="row">
@@ -28,7 +70,7 @@
                            </div>
                            <div class="col-sm-6 col-xs-6 " align="center">
                               <div class="required-field-block"><label>Password :</label>
-                                 <div class="input-group"> 
+                                 <div class="input-group">
                                     <input name="password" id="password" class="form-control" type="password" placeholder="Password">
                                  </div>
                               </div>
@@ -45,13 +87,14 @@
                </div>
             </div>
          </div>
+           <div class="imagehome"></div>
       </div>
       </div>
       <div class="col-md-10 blogShort">
          <h1>Qui sommes nous ?</h1>
          <article>
             <p>
-               Job Search est un site permettant de trouver un job ou d'employer quelqu'un facilement selon vos critères. 
+               Job Search est un site permettant de trouver un job ou d'employer quelqu'un facilement selon vos critères.
             </p>
             <p>Nous proposons un large choix qui dépendra à la fois de vos compétences ainsi que du lieux désiré.</p>
             <p>Tout ce qu'il vous reste à faire est de vous connecter ou vous inscire pour profiter de ce service entièrement gratuit.</p>

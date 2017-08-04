@@ -1,0 +1,29 @@
+
+<html>
+<% include ./partials/head %>
+
+  <body>
+  <% include ./partials/nav %>
+
+
+    <div class="container">
+        <div class="panel-heading">  <h4 >Messages :</h4></div>
+        <div class="clearfix"></div>
+        <hr style="margin:10px 0 10px 0;">
+          <div class="col-md-10 blogShort">
+            <ul>
+              <% messageList.forEach(function(job) { %>
+              <li>
+                <h1> <%= message.sendername %> </h1>
+                <!--<img src=job.profil_image_upload2>-->
+                <article>
+                  <p> Object: <%= message.object %> </p>
+                </article>
+                <a class="btn btn-blog pull-right marginBottom10" href="/message/show/<%= message._id%>">READ MORE</a>
+              </li>
+              <% });%>
+            </ul>
+          </div>
+        </div>
+      </body>
+      </html>

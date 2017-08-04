@@ -1,0 +1,80 @@
+
+<html>
+<% include ./partials/head %>
+
+  <body>
+  <% include ./partials/nav %>
+
+    <div class="container" align="center">
+      <form action="/message/add/" class="form-horizontal" role="form" method="post">
+        <div class="row-xs-5">
+          <div class="col-md-10 ">
+            <div class="panel panel-default" >
+              <div class="panel-heading">  <h4 >Message</h4></div>
+              <div class="panel-body" >
+                <div class="box box-info">
+                  <div class="box-body">
+                    <div class="clearfix"></div>
+                    <hr style="margin:10px 0 10px 0;">
+
+                    <div class="col-sm-6 col-xs-6 "  align="center">
+                      <div class="required-field-block">
+                        <label>Email du destinataire:</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="emailComp" id="emailComp" placeholder="Email" required>
+                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 "  align="center">
+                      <div class="required-field-block">
+                        <label>Object :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="object" id="object" placeholder="Object">
+                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="clearfix"></div>
+                      <hr style="margin:20px 0 20px 0;">
+
+                    <div class="col-sm-12 col-xs-12 "  align="left">
+                      <div class="required-field-block">
+                        <label>Your message : </label>
+                        <div class="input-group">
+                          <textarea rows="6" class="form-control" placeholder="Message"name="message" id="message"></textarea>
+                          <span class="input-group-addon succes">
+                            <span class="glyphicon glyphicon-remove">
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+              </div>
+            </div>
+            <div class="panel-heading">
+              <div class="col-sm-12 col-xs-6 "  align="center">
+
+            </div>
+          </div>
+
+            <button type="submit" class="btn-lg">Submit</button>
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+          </div>
+          <script>
+          $(function() {
+            $('#profile-image1').on('click', function() {
+              $('#profile-image-upload').click();
+            });
+          });
+          </script>
+        </div>
+      </form>
+    </div>
+  </body>
+  </html>
