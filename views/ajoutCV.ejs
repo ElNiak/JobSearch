@@ -27,36 +27,18 @@
                     <hr style="margin:10px 0 10px 0;">
 
                     <div class="col-sm-6 col-xs-6 "  align="center">
-                      <div class="required-field-block" >
-                        <label>First Name :</label>
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="firstnameCV" name="firstnameCV"  placeholder="First name" required>
-                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
-                        </div>
-                      </div>
+                      <p> <b>First Name:</b> <%= user.first_name %>  </p>
                     </div>
 
 
                     <div class="col-sm-6 col-xs-6 "  align="center">
-                      <div class="required-field-block" >
-                        <label>Last Name :</label>
-                        <div class="input-group">
-                          <input type="text" class="form-control" name="lasttnameCV" id="lasttnameCV" placeholder="Last name" required>
-                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
-                        </div>
-                      </div>
+                      <p> <b>Last Name:</b> <%= user.last_name %>  </p>
                     </div>
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
 
                     <div class="col-sm-6 col-xs-6 "  align="center">
-                      <div class="required-field-block">
-                        <label>Email :</label>
-                        <div class="input-group">
-                          <input type="email" class="form-control" name="emailCV" id="emailCV" placeholder="Email" required>
-                          <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
-                        </div>
-                      </div>
+                      <p> <b>Email:</b> <%= user.email %>  </p>
                     </div>
                     <div class="col-sm-6 col-xs-6 "  align="center">
                       <label>Professional phone :</label>

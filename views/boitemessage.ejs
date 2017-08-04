@@ -10,14 +10,14 @@
         <div class="panel-heading">  <h4 >Messages :</h4></div>
         <div class="clearfix"></div>
         <hr style="margin:10px 0 10px 0;">
-          <div class="col-md-10 blogShort">
+          <div class="col-md-10">
             <ul>
-              <% messageList.forEach(function(job) { %>
+              <% messageList.forEach(function(message) { %>
               <li>
-                <h1> <%= message.sendername %> </h1>
+                <h1> <%= message.email %> </h1>
                 <!--<img src=job.profil_image_upload2>-->
                 <article>
-                  <p> Object: <%= message.object %> </p>
+                  <p> Object: <%= message.objet %> </p>
                 </article>
                 <a class="btn btn-blog pull-right marginBottom10" href="/message/show/<%= message._id%>">READ MORE</a>
               </li>

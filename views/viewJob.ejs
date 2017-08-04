@@ -7,8 +7,8 @@
 
     <div class="container" align="center">
       <form action="/job/add/" class="form-horizontal" role="form" method="post">
-        <div class="row">
-          <div class="col-sm-12 col-xs-10">
+        <div class="row-xs-20">
+          <div class="col-md-20">
             <div class="panel panel-default" >
               <div class="panel-heading">  <h4 >Your job offer</h4></div>
               <div class="panel-body">
@@ -16,26 +16,25 @@
                   <div class="box-body">
                     <div class="col-sm-20">
                       <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" align="center">
-
                     </div>
                     <hr style="margin:1px 0 1px 0;">
-                    <div class="col-sm-6 col-xs-4 "  >
+                    <div class="col-sm-6 col-xs-6 "  >
                       <div class="required-field-block" id="compNamev" name="compNamev">
                         <label>Company Name :</label>
                         <%= job.companyname %>
                       </div>
                     </div>
-                    <div class="col-sm-6 col-xs-4 " id="emailCompv" name="emailCompv" >
+                    <div class="col-sm-6 col-xs-6 " id="emailCompv" name="emailCompv" >
                       <label>Email :</label>
                       <%= job.emailComp %>
                     </div>
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
-                    <div class="col-sm-6 col-xs-4 "id="phoneCompv" name="phoneCompv"  >
+                    <div class="col-sm-6 col-xs-6 "id="phoneCompv" name="phoneCompv"  >
                       <label>Professional phone :</label>
                       <%= job.phoneComp %>
                     </div>
-                    <div class="col-sm-6 col-xs-4 " id="expeCompv" name="expeCompv">
+                    <div class="col-sm-6 col-xs-6 " id="expeCompv" name="expeCompv">
                       <div class="required-field-block" >
                         <label>Experience required :</label>
                         <%= job.experienceComp %>
@@ -43,13 +42,13 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
-                    <div class="col-sm-6 col-xs-4 "id="domCompv" name="domCompv">
+                    <div class="col-sm-6 col-xs-6 "id="domCompv" name="domCompv">
                       <div class="required-field-block" >
                         <label>Domain required :</label>
                         <%= job.sectorComp %>
                       </div>
                     </div>
-                    <div class="col-sm-6 col-xs-4 "id="langCompv" name="langCompv" >
+                    <div class="col-sm-6 col-xs-6 "id="langCompv" name="langCompv" >
                       <div class="required-field-block">
                         <label>Langage required :</label>
                         <%= job.sTongueComp %>
@@ -59,13 +58,13 @@
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
 
-                    <div class="col-sm-6 col-xs-4 "id="locCompv" name="locCompv" >
+                    <div class="col-sm-6 col-xs-6 "id="locCompv" name="locCompv" >
                       <div class="required-field-block" >
                         <label>Localisation :</label>
                         <%= job.localisationComp %>
                       </div>
                     </div>
-                    <div class="col-sm-6 col-xs-4 "id="salaryV" name="salaryV">
+                    <div class="col-sm-6 col-xs-6 "id="salaryV" name="salaryV">
                       <div class="required-field-block">
                         <label>Salary proposed :</label>
                         <%= job.salary %>
@@ -75,7 +74,7 @@
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
 
-                    <div class="col-sm-6 col-xs-4" id="durV" name="durV">
+                    <div class="col-sm-6 col-xs-6" id="durV" name="durV">
                       <div class="required-field-block" >
                         <label>Duration and schedule :</label>
                         <%= job.temp %>
@@ -93,7 +92,7 @@
                   </div>
                   <!-- /.box -->
                 </div>
-                <div class="col-sm-12 col-xs-3 " align="center" id="descrCompv" name="descrCompv">
+                <div class="col-sm-12 col-xs-6 " align="center" id="descrCompv" name="descrCompv">
                   <div class="required-field-block">
                     <label>Description:</label>
                     <%= job.descrComp %>
@@ -112,7 +111,7 @@
 
         </div>
       </form>
-      </div>
+    </div>
 
 </body>
 </html>

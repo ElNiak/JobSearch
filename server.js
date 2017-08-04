@@ -39,8 +39,11 @@ app.get('/', function(req, res) {
 });
 //action: login
 app.post('/login', urlencodedParser, function(req, res){  
-  db.get('users').findOne({email:req.body.email, password:req.body.password}).then(
-    (doc) => {
+  db.get('users').findOne({email:req.body.email, password:req.body.password},
+    (err,doc) => {
+      if(err) {
+        res.send(err);
+      }
       if(doc){//on a trouvé un utilisateur correspondant
         req.session.user = doc.email;
         res.redirect('/navigationJob');
@@ -69,8 +72,11 @@ app.post('/register/add/',urlencodedParser, function(req, res){
   }
   //insère les données dans la db et crée la session d'utilisateur
   //vérifie d'abord si l'adresse email est déjà utilisée
-  db.get('users').findOne({email:response.email}).then(
-    (doc) => {
+  db.get('users').findOne({email:response.email},
+    (err,doc) => {
+      if(err) {
+        res.send(err);
+      }
       if(doc){//mail déjà utilisé
         res.render(__dirname + "/views/"+'register.ejs',{message: "Email already used by an account"});
       }
@@ -86,9 +92,25 @@ app.post('/register/add/',urlencodedParser, function(req, res){
             }
           }
         );
+        var cv = {
+          profil_image_upload:"",
+          firstnameCV:"",
+          lasttnameCV:"",
+          emailCV:req.body.email,
+          phoneCV:"",
+          qualifCV:"",
+          experienceCV:"",
+          localisationCV:"",
+          motherTongueCV:"",
+          sTongueCV:"",
+          desciCV:"",
+          motivCV:"",
+          attemptsCV:"",
+          sectorCV:""
+        }
 
         //ajoute un cv contenant juste l'adresse mail de l'utilisateur dans la base de donnée
-        db.get('cv').insert({emailCV:req.body.email},
+        db.get('cv').insert(cv,
           (err, doc) => {
             if (err) {//erreur lors de de l'insertion dans la base de donnée
               res.send(err);
@@ -105,31 +127,49 @@ app.post('/register/add/',urlencodedParser, function(req, res){
 
 //page ajouter CV
 app.get('/cv', function(req, res) {
-	res.render(__dirname + "/views/"+'ajoutCV.ejs');
+  db.get('users').findOne({email:req.session.user},
+    (err,user) => {
+      if(err) {
+        res.send(err);
+      }
+      res.render(__dirname + "/views/"+'ajoutCV.ejs',{user:user});
+    }
+  )
 });
 app.post('/cv/add/',urlencodedParser, function(req, res){
-  var response = {
-    profil_image_upload:req.body.profile_image_upload,
-		firstnameCV:req.body.firstnameCV,
-    lasttnameCV:req.body.lasttnameCV,
-    emailCV:req.body.emailCV,
-		phoneCV:req.body.phoneCV,
-		qualifCV:req.body.qualifCV,
-    experienceCV:req.body.experienceCV,
-    localisationCV:req.body.localisationCV,
-    motherTongueCV:req.body.motherTongueCV,
-		sTongueCV:req.body.sTongueCV,
-		desciCV:req.body.desciCV,
-		motivCV:req.body.motivCV,
-		attemptsCV:req.body.attemptsCV,
-    sectorCV:req.body.sectorCV2
-  }
-  //change le cv de l'utilisateur en cours
-  db.get('cv').findOneAndUpdate({emailCV:response.emailCV}, response).then(
-    (doc) => {
-      res.redirect('/navigationCV');//TODO: rien trouvé
-    }
-  );
+  db.get('users').findOne({email:req.session.user},
+    (err,user) => {
+      if(err) {
+        res.send(err);
+      }
+      var response = {
+        profil_image_upload:req.body.profile_image_upload,
+    		firstnameCV:user.first_name,
+        lasttnameCV:user.last_name,
+        emailCV:user.email,
+    		phoneCV:req.body.phoneCV,
+    		qualifCV:req.body.qualifCV,
+        experienceCV:req.body.experienceCV,
+        localisationCV:req.body.localisationCV,
+        motherTongueCV:req.body.motherTongueCV,
+    		sTongueCV:req.body.sTongueCV,
+    		desciCV:req.body.desciCV,
+    		motivCV:req.body.motivCV,
+    		attemptsCV:req.body.attemptsCV,
+        sectorCV:req.body.sectorCV2
+      }
+      //change le cv de l'utilisateur en cours
+      db.get('cv').findOneAndUpdate({emailCV:response.emailCV}, response).then(
+        (doc) => {
+          if(doc){
+            res.redirect('/navigationCV');
+          }
+          else{
+            res.render(__dirname + "/views/"+'ajoutCV.ejs',{user:user});
+          }
+        }
+      );
+    });
 });
 //navigation cv
 app.get('/navigationCV', function(req, res) {
@@ -143,21 +183,27 @@ app.get('/navigationCV', function(req, res) {
 app.post('/navigationCV/search',urlencodedParser, function(req, res){
   db.get('cv').find({sectorCV:req.body.sectorCV,
     experienceCV:req.body.experienceCV,
-    localisationCV:req.body.localisationCV}).then(
-    (doc) => {
+    localisationCV:req.body.localisationCV},
+    (err, doc) => {
+      if(err){
+        res.send(err);
+      }
       if(doc){
         res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc, message:""});
       }
       else{
-        res.redirect('/navigationCV');//TODO:rien trouvé
+        res.redirect('/navigationCV');
       }
     }
   );
 });
 app.get('/cv/show/:id', function(req,res){
   var id = req.params.id;
-  db.get('cv').findOne({'_id':id}).then(
-    (doc) =>{
+  db.get('cv').findOne({'_id':id},
+    (err,doc) =>{
+      if(err){
+        res.send(err);
+      }
       if(doc){
         res.render(__dirname + "/views/"+'viewCV.ejs',{cv:doc, message:""})
       }
@@ -209,8 +255,11 @@ app.get('/navigationJob', function(req, res) {
 app.post('/navigationJob/search',urlencodedParser, function(req, res){
   db.get('job').find({sectorComp:req.body.sectorComp,
                       experienceComp:req.body.experienceComp,
-                      localisationComp: req.body.localisationComp}).then(
-    (doc) => {
+                      localisationComp: req.body.localisationComp},
+    (err,doc) => {
+      if (err) {
+        res.send(err);
+      }
       if(doc){
         res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc, message:""});
       }
@@ -222,8 +271,11 @@ app.post('/navigationJob/search',urlencodedParser, function(req, res){
 });
 app.get('/job/show/:id', function(req,res){
   var id = req.params.id;
-  db.get('job').findOne( {_id:id}).then(
-    (doc) =>{
+  db.get('job').findOne( {_id:id},
+    (err,doc) =>{
+      if (err) {
+        res.send(err);
+      }
       res.render(__dirname + "/views/"+'viewJob.ejs',{job:doc, message:""})
     })
 });
@@ -233,13 +285,16 @@ app.get('/messagerie', function(req, res) {
   res.render(__dirname + "/views/"+'messagerie.ejs',{message:""});
 });
 app.get('/boitemessage', function(req, res) {
-  db.get('message').find({emailComp:req.session.user}).then(
-    (doc) => {
-        res.render(__dirname + "/views/"+'boitemessage.ejs',{messageList:doc, message:""});
+  db.get('message').find({emailComp:req.session.user},
+    (err,doc) => {
+      if (err) {
+        res.send(err);
+      }
+      res.render(__dirname + "/views/"+'boitemessage.ejs',{messageList:doc, message:""});
     }
   );  
 });
-app.post('/messagerie/send/',urlencodedParser, function(req, res){
+app.post('/message/add/',urlencodedParser, function(req, res){
    var response = {
     email:req.session.user,
     emailComp:req.body.emailComp,
@@ -256,6 +311,13 @@ app.post('/messagerie/send/',urlencodedParser, function(req, res){
       }
     }
   );
+});
+app.get('/message/show/:id', function(req,res){
+  var id = req.params.id;
+  db.get('message').findOne( {_id:id}).then(
+    (doc) =>{
+      res.render(__dirname + "/views/"+'viewMessage.ejs',{message:doc})
+    })
 });
 
 //404
