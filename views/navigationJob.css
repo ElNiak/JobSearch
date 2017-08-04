@@ -58,7 +58,7 @@
  h2{color:#34ca78;}
  .margin10{margin-bottom:10px; margin-right:10px;}
 
- body{margin:0; padding:0; background:url(images/mainbg.gif) 0 0 repeat-x #fff; font:14px/18px Georgia, "Times New Roman", Times, serif; color:#666;}
+ body{margin:0; padding:0;  font:14px/18px Georgia, "Times New Roman", Times, serif; color:#666;} /*background:url(images/mainbg.gif) 0 0 repeat-x #fff;*/
  div, p, ul, h1, h2, h3, h4, form{margin:0px; padding:0px;}
  ul{list-style-type:none;}
 
@@ -71,9 +71,9 @@
 
  #topPan ul{width:410px; height:27px; position:absolute; top:77px; right:0px;}
  #topPan ul li{float:left; width:82px; height:27px; display:block;}
- #topPan ul li a{display:block; width:100px; height:27px; background:#FBA01B; color:#fff; font:13px/27px Arial, Helvetica, sans-serif; text-decoration:none; font-weight:bold; text-align:center;}
- #topPan ul li a:hover{background:url(images/bullet1.gif) 50% 0 no-repeat #FBA01B; color:#fff; text-decoration:none;}
- #topPan ul li.company{background:url(images/bullet1.gif) 50% 0 no-repeat #FBA01B; color:#fff; text-decoration:none; font:13px/27px Arial, Helvetica, sans-serif; font-weight:bold; text-align:center;}
+ #topPan ul li a{display:block; width:100px;  background:#FBA01B; color:#fff; font:13px/27px Arial, Helvetica, sans-serif; text-decoration:none; font-weight:bold; text-align:center;}
+ #topPan ul li a:hover{color:#fff; text-decoration:none;} /*background:url(images/bullet1.gif) 50% 0 no-repeat #FBA01B;  */
+ #topPan ul li.company{color:#fff; text-decoration:none; font:13px/27px Arial, Helvetica, sans-serif; font-weight:bold; text-align:center;}
  /*--/Top Panel--*/
 
  /*--Middle Panel--*/

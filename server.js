@@ -83,7 +83,6 @@ app.post('/register/add/',urlencodedParser, function(req, res){
             }
             else {//success
               req.session.user = doc.email;
-              console.log(req.session.user);
             }
           }
         );
@@ -106,7 +105,6 @@ app.post('/register/add/',urlencodedParser, function(req, res){
 
 //page ajouter CV
 app.get('/cv', function(req, res) {
-  console.log(req.session.user);
 	res.render(__dirname + "/views/"+'ajoutCV.ejs');
 });
 app.post('/cv/add/',urlencodedParser, function(req, res){
@@ -137,7 +135,7 @@ app.post('/cv/add/',urlencodedParser, function(req, res){
 app.get('/navigationCV', function(req, res) {
   db.get('cv').find().then(
     (doc) => {
-      res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
+      res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc, message:""});
     }
   );
 });
@@ -148,7 +146,7 @@ app.post('/navigationCV/search',urlencodedParser, function(req, res){
     localisationCV:req.body.localisationCV}).then(
     (doc) => {
       if(doc){
-        res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc});
+        res.render(__dirname + "/views/"+'navigationCV.ejs',{cvlist:doc, message:""});
       }
       else{
         res.redirect('/navigationCV');//TODO:rien trouvé
@@ -161,17 +159,17 @@ app.get('/cv/show/:id', function(req,res){
   db.get('cv').findOne({'_id':id}).then(
     (doc) =>{
       if(doc){
-        res.render(__dirname + "/views/"+'viewCV.ejs',{cv:doc})
+        res.render(__dirname + "/views/"+'viewCV.ejs',{cv:doc, message:""})
       }
       else{
-        res.render(__dirname + "/views/"+'navigationCV.ejs');
+        res.render(__dirname + "/views/"+'navigationCV.ejs', {message:""});
       }
     })
 });
 
 //page ajouter Job
 app.get('/job', function(req, res) {
-  res.render(__dirname + "/views/"+'ajoutJob.ejs');
+  res.render(__dirname + "/views/"+'ajoutJob.ejs', {message:""});
 });
 app.post('/job/add/',urlencodedParser, function(req, res){
   var response = {
@@ -203,20 +201,22 @@ app.post('/job/add/',urlencodedParser, function(req, res){
 app.get('/navigationJob', function(req, res) {
   db.get('job').find().then(
     (doc) => {
-        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc});
+        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc, message:""});
     }
   );	
 });
 //recherche job
 app.post('/navigationJob/search',urlencodedParser, function(req, res){
-  var response = {
-    sectorComp:req.body.sectorComp,
-    experienceComp:req.body.experienceComp,
-    localisationComp: req.body.localisationComp
-  };
-  db.get('job').find(response).then(
+  db.get('job').find({sectorComp:req.body.sectorComp,
+                      experienceComp:req.body.experienceComp,
+                      localisationComp: req.body.localisationComp}).then(
     (doc) => {
-      res.render(__dirname + "/views/"+'navigationJobSearch.ejs',{joblist:doc});
+      if(doc){
+        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:doc, message:""});
+      }
+      else{
+        res.render(__dirname + "/views/"+'navigationJob.ejs',{joblist:{}, message:"aucun résultat correspondant"});
+      }  
     }
   );  
 });
@@ -224,8 +224,37 @@ app.get('/job/show/:id', function(req,res){
   var id = req.params.id;
   db.get('job').findOne( {_id:id}).then(
     (doc) =>{
-      res.render(__dirname + "/views/"+'viewJob.ejs',{job:doc})
+      res.render(__dirname + "/views/"+'viewJob.ejs',{job:doc, message:""})
     })
+});
+
+
+app.get('/messagerie', function(req, res) {
+  res.render(__dirname + "/views/"+'messagerie.ejs',{message:""});
+});
+app.get('/boitemessage', function(req, res) {
+  db.get('message').find().then(
+    (doc) => {
+        res.render(__dirname + "/views/"+'boitemessage.ejs',{messageList:doc, message:""});
+    }
+  );  
+});
+app.post('/messagerie/send/',urlencodedParser, function(req, res){
+   var response = {
+    emailComp:req.body.emailComp,
+    objet:req.body.object,
+    mail:req.body.message
+  }
+  db.get('message').insert(response,
+    (err, doc) => {
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.redirect('/boitemessage');
+      }
+    }
+  );
 });
 
 //404

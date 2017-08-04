@@ -1,31 +1,9 @@
 
 <html>
-<head>
-  <title>JobSearch</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link href="styleAdd.css" rel="stylesheet" type="text/css" />
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-
-  <style type="text/css">
-  input.hidden {
-    position: absolute;
-    left: -9999px;
-  }
-
-  #profile-image1 {
-    cursor: pointer;
-    width: 100px;
-    height: 100px;
-    border:2px solid #FBA01B ;}
-    .tital{ font-size:16px; font-weight:600;}
-    .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
-    </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  </head>
+<% include ./partials/head %>
 
   <body>
+  <% include ./partials/nav %>
     <div class="container" align="center">
       <form action="/job/add/" class="form-horizontal" role="form" method="post">
         <div class="row-xs-10">
@@ -167,7 +145,7 @@
                   <div class="required-field-block">
                     <label>Salary proposed :</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" name="salary" id="salary" placeholder="Mother tongue" required>
+                      <input type="text" class="form-control" name="salary" id="salary" placeholder="Salary" required>
                       <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
                   </div>
@@ -176,7 +154,7 @@
                   <div class="required-field-block" >
                     <label>Duration and schedule :</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" name="temp" id="temp" placeholder="Localisation" required>
+                      <input type="text" class="form-control" name="temp" id="temp" placeholder="Schedule" required>
                       <span class="input-group-addon succes"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
                   </div>

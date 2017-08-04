@@ -1,65 +1,9 @@
 
 <html>
-<head>
-  <title>JobSearch</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <link href="styleAdd.css" rel="stylesheet" type="text/css" />
-  <link href="navigationJob.css" rel="stylesheet" type="text/css" />
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .search {
-      margin-top: 0px;
+<% include ./partials/head %>
 
-    }
-    .search .form-section{
-      background:rgba(0,0,0,0.6);
-      position:relative;
-      border: 2px solid #414141;
-      border-radius: 5px;
-      padding: 20px;
-    }
-    .serchtile{
-      color:#fff;
-    }
-  </style>
-  <style type="text/css">
-    input.hidden {
-      position: absolute;
-      left: -9999px;
-    }
-
-    #profile-image1 {
-      cursor: pointer;
-      width: 100px;
-      height: 100px;
-      border:2px solid #FBA01B ;}
-      .tital{ font-size:16px; font-weight:600;}
-      .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:10px 0  10px 0}
-    </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  </head>
   <body>
-    <div id="topPan">
-      <div id="banner">
-        <div id="banner_contents">
-          <ul>
-            <li><a href="/">Logout</a></li>
-            <li class="dropdown">
-              <a  class="dropbtn">Listes</a>
-              <div class="dropdown-content">
-                <a href="/navigationCV">CVs</a>
-                <a href="/navigationJob">Offres</a>
-              </div>
-            </li>
-            <li><a href="/cv">Add CV</a></li>
-            <li><a href="/job">Add Jobs</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
+  <% include ./partials/nav %>
 
     <div class="container">
       <div class="search">
