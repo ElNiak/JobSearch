@@ -241,6 +241,7 @@ app.get('/boitemessage', function(req, res) {
 });
 app.post('/messagerie/send/',urlencodedParser, function(req, res){
    var response = {
+    email:req.session.user,
     emailComp:req.body.emailComp,
     objet:req.body.object,
     mail:req.body.message
